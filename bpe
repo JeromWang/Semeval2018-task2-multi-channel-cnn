@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+if [ -f "vocab" ]; then
+	echo "vocab exists."
+else
+	./learn_bpe.py -s 10000 < corpus > vocab
+fi
+
+./apply_bpe.py --separator ' ' -c vocab < us_train.text > segmented_us_train.text
+./apply_bpe.py --separator ' ' -c vocab < us_test.text > segmented_us_test.text
+
